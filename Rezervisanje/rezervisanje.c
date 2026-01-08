@@ -63,7 +63,7 @@ void rezervisiSto(
     }
 
     if(izabraniSto->status==1){
-        printf("Sto viöe nije dostupan.\n");
+        printf("Sto vi≈°e nije dostupan.\n");
         printf("Povratak na odabir stola.\n");
         return;
     }
@@ -104,6 +104,6 @@ void rezervisiSto(
 
     izabraniSto->status=1;
 
-    printf("Rezervacija uspjeöna.\n");
+    printf("Rezervacija uspje≈°na.\n");
     printf("Sto je zauzet.\n");
 }
