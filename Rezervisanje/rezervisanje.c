@@ -60,3 +60,4 @@ void rezervisiSto(
 
     Zahtjev z;
     z.zahtjevId = (*brojZahtjeva) + 1;
+// #5 Rezervisanje
