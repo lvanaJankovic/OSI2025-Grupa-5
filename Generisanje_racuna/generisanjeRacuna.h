@@ -171,9 +171,9 @@ void generisiRacun(){
     scanf("%d", &izborFormata);
     char imeFajla[100];
      if (izborFormata == 2)
-         sprintf(imeFajla, "racun_sto_%d.pdf", stoID);
+         sprintf(imeFajla, "neplaceni/racun_sto_%d.pdf", stoID);
      else
-         sprintf(imeFajla, "racun_sto_%d.txt", stoID);
+         sprintf(imeFajla, "neplaceni/racun_sto_%d.txt", stoID);
     FILE *f = fopen(imeFajla, "w");
     if (!f) { printf("Greska pri kreiranju racuna.\n"); return; }
     fprintf(f, "FISKALNI RACUN\nSto: %d\n\n", stoID);
