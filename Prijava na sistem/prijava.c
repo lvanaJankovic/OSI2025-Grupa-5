@@ -4,7 +4,7 @@
 #define MAX 50
 #define BAZA "korisnici.txt"
 
-int provjeriKorisnika(char email[], char lozinka[], int *blokiran){
+int provjeriKorisnika(char email[], char lozinka[]){
     FILE *f=fopen(BAZA, "r");
     if(f==NULL) {
         printf("Greska pri otvaranju baze.\n");
@@ -16,9 +16,8 @@ int provjeriKorisnika(char email[], char lozinka[], int *blokiran){
     int status;
 
     while(fscanf(f, "%s %s %s %d %d %d %s %s %d",
-                     ime, prezime, telefon, &d, &m, &g, mail, pass, &status)!= EOF){
+                     ime, prezime, telefon, &d, &m, &g, mail, pass)!= EOF){
         if(strcmp(mail, email)==0 && strcmp(pass, lozinka)==0){
-            *blokiran=status;
             fclose(f);
             return 1;
         }
@@ -58,17 +57,14 @@ void prijava(){
         scanf("%s", lozinka);
         if(zeliPrekinutiPrijavu())return;
 
-        validno=provjeriKorisnika(email, lozinka, &blokiran);
+        validno=provjeriKorisnika(email, lozinka);
         if(!validno){
             printf("Poruka: Netacna email adresa ili lozinka.\n");
         }
         if(!validno && zeliPrekinutiPrijavu())return;
     }while(!validno);
 
-    if(blokiran){
-        printf("Prijava nije uspjesna. Korisnik je blokiran.\n");
-        return;
-    }
+    
 
     printf("Poruka: Uspjesna prijava na sistem.\n");
     printf("Dodjela privremenog pristupa funkcionalnostima...\n");

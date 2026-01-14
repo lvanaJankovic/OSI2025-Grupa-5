@@ -2,44 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "popust_napojnica.h"
-
-#define MAX_STAVKI 50
-#define MAX_NARUDZBI 50
-#define MAX_MENI 50
-
-typedef struct {
-    int rb;
-    char naziv[30];
-    double cijena;
-} Stavka;
-
-typedef struct {
-    int stoID;
-    int stavke[MAX_STAVKI];
-    int brojStavki;
-    char stanje[20];
-} Narudzba;
-Stavka meni[MAX_MENI];
-Narudzba narudzbe[MAX_NARUDZBI];
-int brojStavkiMenija = 0;
-int brojNarudzbi = 0;
-
-int ucitajMeni(const char *imeFajla){
-    FILE *f = fopen(imeFajla, "r");
-    if (!f) return 0;
-    char linija[256];
-    brojStavkiMenija = 0;
-    while (fgets(linija, sizeof(linija), f)) {
-        if (sscanf(linija, "%d,%29[^,],%lf",
-                   &meni[brojStavkiMenija].rb,
-                   meni[brojStavkiMenija].naziv,
-                   &meni[brojStavkiMenija].cijena) == 3) {
-            brojStavkiMenija++;
-        }
-    }
-    fclose(f);
-    return 1;
-}
+#include"../Kreiranje_narudzbi/KreiranjeNarudzbi.h"
 
 int ucitajNarudzbe(const char *imeFajla) {
     FILE *f = fopen(imeFajla, "r");
