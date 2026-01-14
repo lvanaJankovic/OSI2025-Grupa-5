@@ -1,22 +1,9 @@
 #include <stdio.h>
 #include <string.h>
+#include "rezervisanje.h"
 
 #define MAX_REZERVACIJA 100
 #define MIN_SATI_DO_REZERVACIJE 2
-
-typedef struct{
-    int id;
-    int status; // 0-slobodan, 1-zauzet
-}Sto;
-
-typedef struct{
-    int rezervacijaId;
-    int gostId;
-    int stoId;
-    int dan, mjesec, godina;
-    int sat, minut;
-    int aktivna; // 1-aktivna, 0-otkazana
-}Rezervacija;
 
 int odlukaZaposlenog(){
     int x;
