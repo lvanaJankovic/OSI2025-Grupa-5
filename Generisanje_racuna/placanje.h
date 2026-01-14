@@ -13,7 +13,7 @@ int placanjeGotovina(double iznos) {
     return 1;
 }
 int placanjeKartica() {
-    printf("Ubacite/Prislonite karticu.");
+    printf("Ubacite/Prislonite karticu.\n");
     int pin;
     printf("Unesite PIN kod: ");
     scanf("%d", &pin);
