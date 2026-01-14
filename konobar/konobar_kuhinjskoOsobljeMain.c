@@ -6,6 +6,16 @@
 #include"../Prijava na sistem/prijava.c"
 #include"../Generisanje_racuna/generisanjeRacuna.h"
 #include"../Priprema_narudzbi/pravljenjeNarudzbi.h"
+#include"../Rezervisanje/rezervisanje.h"
+#include"../Pregled dostupnih stolova/dostupnoststolova.h"
+#include"../Otkazivanje rezervacije/otkazivanje.h"
+
+Rezervacija rezervacije[MAX_REZERVACIJA];
+int brojRezervacija = 0;
+Zahtjev zahtjevi[MAX_REZERVACIJA];
+int brojZahtjeva = 0;
+Sto stolovi[MAX_STOLOVA];
+int brojStolova = 0;
 
 int main() {
 
@@ -25,7 +35,19 @@ int main() {
     ucitajNarudzbe("narudzbe.csv");
     _mkdir("placeni");
     _mkdir("neplaceni");
+
    if(uloga == 1){
+    Gost gosti[MAX_GOSTI];
+    int brojGostiju = 0;
+    if (!ucitajGoste("gosti.csv", gosti, &brojGostiju)) {
+        printf("Ne mogu ucitati goste!\n");
+        return 1;
+    }
+
+    if (!ucitajStolove("stolovi.csv", stolovi, &brojStolova)) {
+        printf("Ne mogu ucitati stolove!\n");
+        return 1;
+    }
     do {
         printf("\n===== KONOBAR =====\n");
         printf("1. Prikazi meni\n");
@@ -33,6 +55,9 @@ int main() {
         printf("3. Prikazi narudzbu za sto\n");
         printf("4. Generisi racun\n");
         printf("5. Placanje\n");
+        printf("6. Pregled dostupnih stolova\n");
+        printf("7. Napravi rezervaciju\n");
+        printf("8. Otkazi rezervaciju\n");
         printf("0. Izlaz\n");
         printf("Izbor: ");
         scanf("%d", &izbor);
@@ -53,6 +78,48 @@ int main() {
             case 5:
                 placanje();
                 break;
+            case 6: {
+            int dan, mjesec, godina, sat, minut, brojGostijuZaSto;
+            printf("Unesite datum i vrijeme (dd mm yyyy hh mm): ");
+            scanf("%d %d %d %d %d", &dan, &mjesec, &godina, &sat, &minut);
+            printf("Unesite broj gostiju: ");
+            scanf("%d", &brojGostijuZaSto);
+
+            pregledDostupnihStolova(stolovi, brojStolova, rezervacije, brojRezervacija,
+                                     dan, mjesec, godina, sat, minut, brojGostijuZaSto);
+            break;
+        }
+
+        case 7: {
+            int gostId, stoId, dan, mjesec, godina, sat, minut, brojGostijuZaSto, zaposleniId;
+            printf("Unesite ID gosta: ");
+            scanf("%d", &gostId);
+            printf("Unesite ID stola: ");
+            scanf("%d", &stoId);
+            printf("Unesite datum i vrijeme (dd mm yyyy hh mm): ");
+            scanf("%d %d %d %d %d", &dan, &mjesec, &godina, &sat, &minut);
+            printf("Unesite broj gostiju: ");
+            scanf("%d", &brojGostijuZaSto);
+            printf("Unesite ID konobara: ");
+            scanf("%d", &zaposleniId);
+
+            rezervisiSto(stolovi, brojStolova, rezervacije, &brojRezervacija,
+                         zahtjevi, &brojZahtjeva, gostId, zaposleniId,
+                         stoId, dan, mjesec, godina, sat, minut, brojGostijuZaSto);
+            break;
+        }
+        case 8: {
+            int gostId, rezervacijaId, satiDoRezervacije;
+            printf("Unesite ID gosta: ");
+            scanf("%d", &gostId);
+            printf("Unesite ID rezervacije: ");
+            scanf("%d", &rezervacijaId);
+            printf("Unesite broj sati do rezervacije: ");
+            scanf("%d", &satiDoRezervacije);
+            otkaziRezervaciju(rezervacije, brojRezervacija, stolovi, brojStolova,
+                              gostId, rezervacijaId, satiDoRezervacije);
+            break;
+        }
             case 0:
                 printf("Izlaz iz sistema.\n");
                 break;
