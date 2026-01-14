@@ -78,7 +78,7 @@ void dodajStavku() {
     meni[brojStavkiMenija++] = s;
     sacuvajMeni("meni.csv");
 
-    printf("✔ Stavka dodana!\n");
+    printf("Stavka dodana.\n");
 }
 
 
