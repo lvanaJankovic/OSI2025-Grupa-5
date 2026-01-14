@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1767707204 source:c:\users\home1\documents\osi-projekat\registrovanje na sistem\main.c
+	<stdio.h>
+	<string.h>
+
