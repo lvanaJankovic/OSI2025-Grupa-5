@@ -4,6 +4,7 @@
 #include "upravljanje-prostor.h"
 
 int main() {
+    ucitajMeni("meni.csv");
     int izbor;
     do {
         printf("\n=== MENI ZA ADMINISTRATORA ===\n");
